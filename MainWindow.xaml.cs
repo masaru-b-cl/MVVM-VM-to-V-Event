@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApplication1
 {
@@ -20,16 +8,14 @@ namespace WpfApplication1
   /// </summary>
   public partial class MainWindow : Window
   {
-    private MainWindowViewModel vm;
+    private readonly MainWindowViewModel vm;
+
     public MainWindow()
     {
       InitializeComponent();
 
       vm = DataContext as MainWindowViewModel;
-      vm.Hide += (sender, e) =>
-      {
-        this.Hide();
-      };
+      WeakEventManager<MainWindowViewModel, EventArgs>.AddHandler(vm, "Hide", (sender, e) => this.Hide());
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
